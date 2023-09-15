@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!-- Servlet Configuration -->
+    <servlet>
+        <servlet-name>StartGameServlet</servlet-name>
+        <servlet-class>servlet.StartGameServlet</servlet-class>
+    </servlet>
+
+    <!-- Servlet Mapping -->
+    <servlet-mapping>
+        <servlet-name>StartGameServlet</servlet-name>
+        <url-pattern>/StartGameServlet</url-pattern>
+    </servlet-mapping>
+    <!-- Сервлет для прихожей -->
+    <servlet>
+        <servlet-name>ContinueGameServlet</servlet-name>
+        <servlet-class>servlet.ContinueGameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContinueGameServlet</servlet-name>
+        <url-pattern>/ContinueGameServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Сервлет для гостиной -->
+    <servlet>
+        <servlet-name>LivingRoomServlet</servlet-name>
+        <servlet-class>servlet.LivingRoomServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LivingRoomServlet</servlet-name>
+        <url-pattern>/LivingRoomServlet</url-pattern>
+    </servlet-mapping>
+    <!-- Сервлет для камина -->
+    <servlet>
+        <servlet-name>FireplaceServlet</servlet-name>
+        <servlet-class>servlet.FireplaceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FireplaceServlet</servlet-name>
+        <url-pattern>/FireplaceServlet</url-pattern>
+    </servlet-mapping>
+    <!-- Сервлет для прихожей -->
+    <servlet>
+        <servlet-name>HallwayServlet</servlet-name>
+        <servlet-class>servlet.HallwayServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HallwayServlet</servlet-name>
+        <url-pattern>/HallwayServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Сервлет для столовой -->
+    <servlet>
+        <servlet-name>DiningRoomServlet</servlet-name>
+        <servlet-class>servlet.DiningRoomServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DiningRoomServlet</servlet-name>
+        <url-pattern>/DiningRoomServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Сервлет для музыкального салона -->
+    <servlet>
+        <servlet-name>MusicRoomServlet</servlet-name>
+        <servlet-class>servlet.MusicRoomServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MusicRoomServlet</servlet-name>
+        <url-pattern>/MusicRoomServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Сервлет для библиотеки -->
+    <servlet>
+        <servlet-name>LibraryServlet</servlet-name>
+        <servlet-class>servlet.LibraryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LibraryServlet</servlet-name>
+        <url-pattern>/LibraryServlet</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+
+

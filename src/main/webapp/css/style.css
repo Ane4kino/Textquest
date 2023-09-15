@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Gothic', sans-serif;
+}
+
+.welcome-container {
+    text-align: center;
+    padding: 50px;
+}
+
+img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+h1 {
+    font-size: 36px;
+    color: #b22222; /* кроваво-красный */
+}
+
+p {
+    font-size: 18px;
+}
+
+.start-button {
+    background-color: #D32F2F; /* Красный цвет, напоминающий кровь */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px; /* Увеличьте размер шрифта, чтобы сделать текст выделенным */
+}
+
+.start-button:hover {
+    background-color: #B71C1C; /* Измените цвет при наведении */
+}
+.castle-image {
+    max-width: 100%; /* Максимальная ширина изображения будет равной ширине контейнера */
+    height: auto; /* Автоматический расчет высоты на основе ширины */
+    display: block; /* Убедитесь, что изображение не имеет дополнительных отступов */
+    margin: 0 auto; /* Выравнивание изображения по центру */
+}
+/* Стили для контейнера description-container */
+.description-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.description-container h1 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.description-container p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.description-container form {
+    text-align: center;
+}
+
+.description-container label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.description-container .continue-button {
+    background-color: #ff0000; /* Красный цвет кнопки */
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.description-container .continue-button:hover {
+    background-color: #cc0000; /* Цвет кнопки при наведении */
+}
+
+.description-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.description-container table th, .description-container table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ffffff;
+}
+
+.description-container .key-image {
+    max-width: 50px;
+    /*max-height: 50px;*/
+    margin-top: 10px;
+}
+/* Стиль для изображения ключа (key-image) */
+.key-image {
+    max-width: 50px;
+    /*max-height: 50px;*/
+    margin-top: 10px;
+}
+
