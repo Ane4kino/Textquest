@@ -1,6 +1,7 @@
 package servlet;
 
 import model.Player;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,17 +19,24 @@ public class FireplaceServlet extends HttpServlet {
         Player player = (Player) session.getAttribute("player");
         String action = request.getParameter("action");
 
-        if ("takeKey".equals(action)) {
-            player.setKeysCollected(player.getKeysCollected() + 1);
-            player.setBlueKeyTaken(true);
-            player.setCurrentPlayerRoom("hallway");
-            nextPage = "hallway.jsp";
-        } else if("goToEntryway".equals(action)) {
-            player.setCurrentPlayerRoom("hallway");
-            nextPage = "hallway.jsp";
+        if (action != null) {
+            if ("takeKey".equals(action)) {
+                player.setKeysCollected(player.getKeysCollected() + 1);
+                player.setBlueKeyTaken(true);
+                player.setCurrentPlayerRoom("hallway");
+                nextPage = "hallway.jsp";
+            } else if ("goToEntryway".equals(action)) {
+                player.setCurrentPlayerRoom("hallway");
+                nextPage = "hallway.jsp";
+            }
+        } else {
+            request.setAttribute("error", "Выберите действие перед продолжением.");
+            request.getRequestDispatcher("your_error_page.jsp").forward(request, response);
+            return;
         }
         session.setAttribute("player", player);
         response.sendRedirect(nextPage);
+
     }
 }
 

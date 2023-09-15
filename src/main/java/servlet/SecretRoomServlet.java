@@ -19,18 +19,24 @@ public class SecretRoomServlet extends HttpServlet {
         Player player = (Player) session.getAttribute("player");
         String action = request.getParameter("action");
 
-        if ("goToSecretExecutionRoom".equals(action)) {
-            player.setCurrentPlayerRoom("secretExecutionRoom");
-            nextPage = "secretExecutionRoom.jsp";
-            player.openDoor();
-        } else if ("openChest".equals(action)) {
-            player.setCurrentPlayerRoom("chestLocked");
-            nextPage = "chestLocked.jsp";
-            player.openDoor();
-        }else if ("goToWhiteDoor".equals(action)) {
-            player.setCurrentPlayerRoom("whiteDoor");
-            nextPage = "whiteDoor.jsp";
-            player.openDoor();
+        if (action != null) {
+            if ("goToSecretExecutionRoom".equals(action)) {
+                player.setCurrentPlayerRoom("secretExecutionRoom");
+                nextPage = "secretExecutionRoom.jsp";
+                player.openDoor();
+            } else if ("openChest".equals(action)) {
+                player.setCurrentPlayerRoom("chestLocked");
+                nextPage = "chestLocked.jsp";
+                player.openDoor();
+            } else if ("goToWhiteDoor".equals(action)) {
+                player.setCurrentPlayerRoom("whiteDoor");
+                nextPage = "whiteDoor.jsp";
+                player.openDoor();
+            }
+        } else {
+            request.setAttribute("error", "Выберите действие перед продолжением.");
+            request.getRequestDispatcher("your_error_page.jsp").forward(request, response);
+            return;
         }
 
         session.setAttribute("player", player);

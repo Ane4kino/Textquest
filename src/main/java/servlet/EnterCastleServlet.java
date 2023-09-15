@@ -18,16 +18,7 @@ public class EnterCastleServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Player player = (Player) session.getAttribute("player");
 
-//        int i = 1;//значит игрок играл уже минимум 1 раз
-//        if (player.getGamesPlayed() >= i) {
-//            player.setYellowDoorTaken(false);
-//            player.setBlueDoorTaken(false);
-//            player.setBlueKeyTaken(false);
-//            player.setYellowKeyTaken(false);
-//            player.setRedKeyTaken(false);
-//            player.setKeysCollected(0);
-//            player.setDoorsOpened(0);
-//        }
+
         if ("yes".equals(enterCastle)) {
             player.setCurrentPlayerRoom("hallway");
             response.sendRedirect("hallway.jsp");

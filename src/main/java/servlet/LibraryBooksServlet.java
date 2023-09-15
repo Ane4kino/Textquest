@@ -1,6 +1,7 @@
 package servlet;
 
 import model.Player;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,19 +19,25 @@ public class LibraryBooksServlet extends HttpServlet {
         Player player = (Player) session.getAttribute("player");
         String action = request.getParameter("action");
 
-        if ("takeYellowKey".equals(action)) {
-            if (!player.isYellowKeyTaken()) {
-                player.setKeysCollected(player.getKeysCollected() + 1);
-                player.setYellowKeyTaken(true);
+        if (action != null) {
+            if ("takeYellowKey".equals(action)) {
+                if (!player.isYellowKeyTaken()) {
+                    player.setKeysCollected(player.getKeysCollected() + 1);
+                    player.setYellowKeyTaken(true);
+                    player.setCurrentPlayerRoom("library");
+                    nextPage = "library.jsp";
+                }
+            } else if ("leaveKey".equals(action)) {
+                player.setCurrentPlayerRoom("library");
+                nextPage = "library.jsp";
+            } else if ("goToEntryway".equals(action)) {
                 player.setCurrentPlayerRoom("library");
                 nextPage = "library.jsp";
             }
-        } else if ("leaveKey".equals(action)) {
-            player.setCurrentPlayerRoom("library");
-            nextPage = "library.jsp";
-        }else if("goToEntryway".equals(action)) {
-            player.setCurrentPlayerRoom("library");
-            nextPage = "library.jsp";
+        } else {
+            request.setAttribute("error", "Выберите действие перед продолжением.");
+            request.getRequestDispatcher("your_error_page.jsp").forward(request, response);
+            return;
         }
         response.sendRedirect(nextPage);
         session.setAttribute("player", player);

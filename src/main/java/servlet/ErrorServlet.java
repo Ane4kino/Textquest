@@ -9,18 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
-@WebServlet("/ExecutionDoorServlet")
-public class ExecutionDoorServlet extends HttpServlet {
+@WebServlet("/ErrorServlet")
+public class ErrorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
         Player player = (Player) session.getAttribute("player");
 
-        player.setCurrentPlayerRoom("prisonCorridor");
-        response.sendRedirect("prisonCorridor.jsp");
-        session.setAttribute("player", player);
-        player.openDoor();
+        response.sendRedirect(player.getCurrentPlayerRoom()+".jsp");
     }
 }
+
+
 

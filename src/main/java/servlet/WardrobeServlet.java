@@ -1,6 +1,7 @@
 package servlet;
 
 import model.Player;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,16 +19,22 @@ public class WardrobeServlet extends HttpServlet {
         Player player = (Player) session.getAttribute("player");
         String action = request.getParameter("action");
 
-        if ("goToWardrobeDoor".equals(action)) {
-            nextPage = "wardrobeKey.jsp";
-        } else if ("leaveWardrobe".equals(action)) {
-            if (player.getCurrentPlayerRoom().equals("relaxRoom")) {
-                player.setCurrentPlayerRoom("relaxRoom");
-                nextPage = "relaxRoom.jsp";
-            } else if (player.getCurrentPlayerRoom().equals("bedroom")) {
-                player.setCurrentPlayerRoom("bedroom");
-                nextPage = "bedroom.jsp";
+        if (action != null) {
+            if ("goToWardrobeDoor".equals(action)) {
+                nextPage = "wardrobeKey.jsp";
+            } else if ("leaveWardrobe".equals(action)) {
+                if (player.getCurrentPlayerRoom().equals("relaxRoom")) {
+                    player.setCurrentPlayerRoom("relaxRoom");
+                    nextPage = "relaxRoom.jsp";
+                } else if (player.getCurrentPlayerRoom().equals("bedroom")) {
+                    player.setCurrentPlayerRoom("bedroom");
+                    nextPage = "bedroom.jsp";
+                }
             }
+        } else {
+            request.setAttribute("error", "Выберите действие перед продолжением.");
+            request.getRequestDispatcher("your_error_page.jsp").forward(request, response);
+            return;
         }
         session.setAttribute("player", player);
         response.sendRedirect(nextPage);

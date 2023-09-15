@@ -1,6 +1,7 @@
 package servlet;
 
 import model.Player;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,14 +19,21 @@ public class FlowerServlet extends HttpServlet {
         Player player = (Player) session.getAttribute("player");
         String action = request.getParameter("action");
 
-        if ("takeRedKey".equals(action) && !player.isRedKeyTaken()) {
-            player.setKeysCollected(player.getKeysCollected() + 1);
-            player.setRedKeyTaken(true);
-            nextPage = "garden.jsp";
-            player.setCurrentPlayerRoom("garden");
-        } else if ("goToGarden".equals(action)){
-            nextPage = "garden.jsp";
-            player.setCurrentPlayerRoom("garden");
+        if (action != null) {
+            if ("takeRedKey".equals(action) && !player.isRedKeyTaken()) {
+                player.setKeysCollected(player.getKeysCollected() + 1);
+                player.setRedKeyTaken(true);
+                nextPage = "garden.jsp";
+                player.setCurrentPlayerRoom("garden");
+            } else if ("goToGarden".equals(action)) {
+                nextPage = "garden.jsp";
+                player.setCurrentPlayerRoom("garden");
+            }
+        } else {
+            request.setAttribute("error", "Выберите действие перед продолжением.");
+            request.getRequestDispatcher("your_error_page.jsp").forward(request, response);
+            return;
+
         }
         session.setAttribute("player", player);
         response.sendRedirect(nextPage);

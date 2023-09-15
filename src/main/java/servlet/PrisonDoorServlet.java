@@ -1,6 +1,7 @@
 package servlet;
 
 import model.Player;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,18 +14,13 @@ import java.io.IOException;
 public class PrisonDoorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String nextPage = null;
         HttpSession session = request.getSession();
         Player player = (Player) session.getAttribute("player");
-        String action = request.getParameter("action");
 
-        if ("returnToCorridor".equals(action)) {
-            player.setCurrentPlayerRoom("prisonCorridor");
-            player.openDoor();
-            nextPage = "prisonCorridor.jsp";
-        }
+        player.setCurrentPlayerRoom("prisonCorridor");
+        player.openDoor();
 
         session.setAttribute("player", player);
-        response.sendRedirect(nextPage);
+        response.sendRedirect("prisonCorridor.jsp");
     }
 }

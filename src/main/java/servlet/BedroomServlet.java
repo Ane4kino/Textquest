@@ -1,6 +1,7 @@
 package servlet;
 
 import model.Player;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +33,11 @@ public class BedroomServlet extends HttpServlet {
                 player.setCurrentPlayerRoom("musicRoom");
                 nextPage = "musicRoom.jsp";
             }
+        } else {
+            request.setAttribute("error", "Выберите действие перед продолжением.");
+            request.getRequestDispatcher("your_error_page.jsp").forward(request, response);
+            return;
+
         }
         session.setAttribute("gameState", player);
         response.sendRedirect(nextPage);

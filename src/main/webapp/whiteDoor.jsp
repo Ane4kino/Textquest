@@ -27,21 +27,6 @@
     <input type="submit" class="continue-button" value="Перезапустить квест">
   </form>
 
-<%--  <h2>Информация о вашем путешествии:</h2>--%>
-<%--  <table>--%>
-<%--    <tr>--%>
-<%--      <th>Количество открытых дверей</th>--%>
-<%--      <th>Количество найденных ключей</th>--%>
-<%--      <th>Количество попыток сыграть</th>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--      <td>${player.openedDoorsCount}</td>--%>
-<%--      <td>${player.keysFoundCount}</td>--%>
-<%--      <td>${player.attemptsCount}</td>--%>
-<%--    </tr>--%>
-<%--  </table>--%>
-
-
 </div>
 </body>
 </html>

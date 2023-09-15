@@ -1,6 +1,7 @@
 package servlet;
 
 import model.Player;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,36 +19,43 @@ public class SecretExecutionDoorServlet extends HttpServlet {
         Player player = (Player) session.getAttribute("player");
         String action = request.getParameter("action");
 
-        if ("openDoor".equals(action)) {
-            if (player.getCurrentPlayerRoom().equals("weaponRoom")) {
-                player.setCurrentPlayerRoom("secretExecutionRoom");
-                nextPage = "secretExecutionRoom.jsp";
-                player.openDoor();
-                player.setYellowDoorTaken(true);
-            } else if (player.getCurrentPlayerRoom().equals("secretExecutionRoom")) {
-                player.setCurrentPlayerRoom("weaponRoom");
-                nextPage = "weaponRoom.jsp.jsp";
-                player.openDoor();
-                player.setYellowDoorTaken(true);
+        if (action != null) {
+            if ("openDoor".equals(action)) {
+                if (player.getCurrentPlayerRoom().equals("weaponRoom")) {
+                    player.setCurrentPlayerRoom("secretExecutionRoom");
+                    nextPage = "secretExecutionRoom.jsp";
+                    player.openDoor();
+                    player.setYellowDoorTaken(true);
+                } else if (player.getCurrentPlayerRoom().equals("secretExecutionRoom")) {
+                    player.setCurrentPlayerRoom("weaponRoom");
+                    nextPage = "weaponRoom.jsp.jsp";
+                    player.openDoor();
+                    player.setYellowDoorTaken(true);
+                }
+            } else if ("return".equals(action)) {
+                if (player.getCurrentPlayerRoom().equals("secretExecutionRoom")) {
+                    player.setCurrentPlayerRoom("secretExecutionRoom");
+                    nextPage = "secretExecutionRoom.jsp";
+                } else if (player.getCurrentPlayerRoom().equals("weaponRoom")) {
+                    player.setCurrentPlayerRoom("weaponRoom");
+                    nextPage = "weaponRoom.jsp";
+                }
+            } else if ("goToRoom".equals(action)) {
+                if (player.getCurrentPlayerRoom().equals("secretExecutionRoom")) {
+                    player.setCurrentPlayerRoom("weaponRoom");
+                    nextPage = "weaponRoom.jsp";
+                    player.openDoor();
+                } else if (player.getCurrentPlayerRoom().equals("weaponRoom")) {
+                    player.setCurrentPlayerRoom("secretExecutionRoom");
+                    nextPage = "secretExecutionRoom.jsp";
+                    player.openDoor();
+                }
             }
-        } else if ("return".equals(action)) {
-            if (player.getCurrentPlayerRoom().equals("secretExecutionRoom")) {
-                player.setCurrentPlayerRoom("secretExecutionRoom");
-                nextPage = "secretExecutionRoom.jsp";
-            } else if (player.getCurrentPlayerRoom().equals("weaponRoom")) {
-                player.setCurrentPlayerRoom("weaponRoom");
-                nextPage = "weaponRoom.jsp";
-            }
-        }else if ("goToRoom".equals(action)) {
-            if (player.getCurrentPlayerRoom().equals("secretExecutionRoom")) {
-                player.setCurrentPlayerRoom("weaponRoom");
-                nextPage = "weaponRoom.jsp";
-                player.openDoor();
-            } else if (player.getCurrentPlayerRoom().equals("weaponRoom")) {
-                player.setCurrentPlayerRoom("secretExecutionRoom");
-                nextPage = "secretExecutionRoom.jsp";
-                player.openDoor();
-            }
+        } else {
+            request.setAttribute("error", "Выберите действие перед продолжением.");
+            request.getRequestDispatcher("your_error_page.jsp").forward(request, response);
+            return;
+
         }
 
         session.setAttribute("player", player);

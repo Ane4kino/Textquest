@@ -19,25 +19,31 @@ public class HallwayServlet extends HttpServlet {
         Player player = (Player) session.getAttribute("player");
         String action = request.getParameter("action");
 
-        if ("goToLibrary".equals(action)) {
-            player.setCurrentPlayerRoom("library");
-            nextPage = "library.jsp";
-            player.openDoor();
-        } else if ("goToFireplace".equals(action)) {
-            player.setCurrentPlayerRoom("fireplace");
-            nextPage = "fireplace.jsp";
-            player.openDoor();
-        } else if ("goToPrisonCorridor".equals(action)) {
-            player.setCurrentPlayerRoom("prisonCorridorRoom");
-            nextPage = "prisonCorridor.jsp";
-            player.openDoor();
-        } else if ("goToLivingRoom".equals(action)) {
-            player.setCurrentPlayerRoom("livingRoom");
-            nextPage = "livingRoom.jsp";
-            player.openDoor();
-        } else if ("goToExit".equals(action)) {
-            nextPage = "gameover.jsp";
-            player.openDoor();
+        if (action != null) {
+            if ("goToLibrary".equals(action)) {
+                player.setCurrentPlayerRoom("library");
+                nextPage = "library.jsp";
+                player.openDoor();
+            } else if ("goToFireplace".equals(action)) {
+                player.setCurrentPlayerRoom("fireplace");
+                nextPage = "fireplace.jsp";
+                player.openDoor();
+            } else if ("goToPrisonCorridor".equals(action)) {
+                player.setCurrentPlayerRoom("prisonCorridorRoom");
+                nextPage = "prisonCorridor.jsp";
+                player.openDoor();
+            } else if ("goToLivingRoom".equals(action)) {
+                player.setCurrentPlayerRoom("livingRoom");
+                nextPage = "livingRoom.jsp";
+                player.openDoor();
+            } else if ("goToExit".equals(action)) {
+                nextPage = "gameover.jsp";
+                player.openDoor();
+            }
+        } else {
+            request.setAttribute("error", "Выберите действие перед продолжением.");
+            request.getRequestDispatcher("your_error_page.jsp").forward(request, response);
+            return;
         }
         session.setAttribute("player", player);
         response.sendRedirect(nextPage);

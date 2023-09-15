@@ -1,6 +1,7 @@
 package servlet;
 
 import model.Player;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,18 +19,24 @@ public class WeaponRoomServlet extends HttpServlet {
         Player player = (Player) session.getAttribute("player");
         String action = request.getParameter("action");
 
-        if ("relaxRoom".equals(action)) {
-            player.setCurrentPlayerRoom("relaxRoom");
-            nextPage = "relaxRoom.jsp";
-            player.openDoor();
-        } else if ("prisonCorridor".equals(action)) {
-            player.setCurrentPlayerRoom("prisonCorridor");
-            nextPage = "prisonCorridor.jsp";
-            player.openDoor();
-        } else if ("secretExecutionRoom".equals(action)) {
-            player.setCurrentPlayerRoom("weaponRoom");
-            nextPage = "secretExecutionDoor.jsp";
-            player.openDoor();
+        if (action != null) {
+            if ("relaxRoom".equals(action)) {
+                player.setCurrentPlayerRoom("relaxRoom");
+                nextPage = "relaxRoom.jsp";
+                player.openDoor();
+            } else if ("prisonCorridor".equals(action)) {
+                player.setCurrentPlayerRoom("prisonCorridor");
+                nextPage = "prisonCorridor.jsp";
+                player.openDoor();
+            } else if ("secretExecutionRoom".equals(action)) {
+                player.setCurrentPlayerRoom("weaponRoom");
+                nextPage = "secretExecutionDoor.jsp";
+                player.openDoor();
+            }
+        } else {
+            request.setAttribute("error", "Выберите действие перед продолжением.");
+            request.getRequestDispatcher("your_error_page.jsp").forward(request, response);
+            return;
         }
 
         session.setAttribute("player", player);
